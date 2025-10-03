@@ -1,0 +1,65 @@
+/* Базовые переменные для светлой темы (по умолчанию) */
+:root {
+  --bg-color: #85dcba;
+  --text-color: #000000;
+  --sidebar-bg: #41b3a3;
+  --nav-link-color: #3b82f6;
+  --nav-link-hover: whitesmoke;
+  --button-bg: #e0e7ff;
+  --button-text: #3b82f6;
+}
+
+/* Темная тема */
+[data-theme='dark'] {
+  --bg-color: #1e1e2f;
+  --text-color: #e4e4f0;
+  --sidebar-bg: #2a2a3d;
+  --nav-link-color: whitesmoke;
+  --nav-link-hover: gray;
+  --button-bg: #3b4252;
+  --button-text: #e4e4f0;
+}
+
+/* Автоматическая тема (адаптируется к системным настройкам) */
+[data-theme='auto'] {
+  /* По умолчанию светлая тема */
+  --bg-color: #85dcba;
+  --text-color: #000000;
+  --sidebar-bg: #41b3a3;
+  --nav-link-color: #3b82f6;
+  --nav-link-hover: whitesmoke;
+  --button-bg: #e0e7ff;
+  --button-text: #3b82f6;
+}
+
+/* Если система в темном режиме и выбрана auto тема */
+@media (prefers-color-scheme: dark) {
+  [data-theme='auto'] {
+    --bg-color: #1e1e2f;
+    --text-color: #e4e4f0;
+    --sidebar-bg: #2a2a3d;
+    --nav-link-color: whitesmoke;
+    --nav-link-hover: gray;
+    --button-bg: #3b4252;
+    --button-text: #e4e4f0;
+  }
+}
+
+/* Общие стили */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html, #root {
+  height: 100%;
+  font-family: sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Плавное переключение тем */
+}
+
+#root {
+  display: flex;
+}

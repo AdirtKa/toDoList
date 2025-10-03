@@ -1,0 +1,26 @@
+nav {
+    width: 150px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: var(--sidebar-bg);
+}
+
+nav > a {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+
+}
+
+nav > a:hover {
+    text-decoration: underline;
+}
+
+nav > a.active {
+    background: var(--bg-color);
+}
