@@ -24,7 +24,7 @@ jobs:
           uv sync --dev
 
       - name: Run Ruff lint
-        run: ruff check src tests
+        run: uv run ruff check src tests
 
       - name: Run pytest
-        run: pytest -v --cov=src tests
+        run: uv run pytest -v --cov=src tests
