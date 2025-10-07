@@ -29,7 +29,7 @@ class ResponseUser(BaseModel):
 
 
 class TokenResponse(BaseModel):
-    """Token response."""
+    """Token response schema."""
 
     access_token: str
     refresh_token: str
