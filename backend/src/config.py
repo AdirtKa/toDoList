@@ -2,8 +2,7 @@
 
 from pathlib import Path
 
-from fastapi_jwt_auth import AuthJWT
-from pydantic import AliasChoices, Field
+from pydantic import AliasChoices, Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -22,15 +21,13 @@ class Settings(BaseSettings):
         description='DSN Postgres',
     )
 
-    authjwt_secret_key: str = Field(
-        validation_alias='AUTHJWT_SECRET_KEY',
+    jwt_secret_key: SecretStr = Field(
+        alias='JWT_SECRET_KEY',
     )
+
+    jwt_algorithm: str = Field(default='HS256', alias='JWT_ALGORITHM')
+    jwt_access_expires: int = Field(default=3600, alias='JWT_ACCESS_EXPIRES')
+    jwt_refresh_expires: int = Field(default=86400, alias='JWT_REFRESH_EXPIRES')
 
 
 settings = Settings()
-
-
-@AuthJWT.load_config
-def get_config() -> Settings:
-    """Load config from env file for jwt auth."""
-    return Settings()
