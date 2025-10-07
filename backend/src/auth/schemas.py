@@ -22,7 +22,7 @@ class LoginUser(BaseUser):
     pass
 
 
-class ResponseUser(BaseUser):
+class ResponseUser(BaseModel):
     """return user information."""
 
     username: str
