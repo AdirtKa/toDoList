@@ -39,7 +39,7 @@ async def create_user(db: AsyncSession, username: str, password_hash: str) -> Us
     """
     stmt = (
         insert(User)
-        .values(username=username, password_hash=password_hash)
+        .values(username=username, password=password_hash)
         .on_conflict_do_nothing(index_elements=[User.username])
         .returning(User)
     )
