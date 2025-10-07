@@ -4,7 +4,7 @@ import hashlib
 
 
 def hash_password(password: str) -> str:
-    """Generate a SHA-256 hash for the given password.
+    """Generate an SHA-256 hash for the given password.
 
     Args:
         password (str): The plain-text password to hash.
