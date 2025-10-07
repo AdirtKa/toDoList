@@ -43,7 +43,7 @@ PY
 # --------- МИГРАЦИИ -----------------------------------------------------------
 echo "Running Alembic migrations..."
 # Если alembic.ini у вас в корне /app, этого достаточно:
-alembic upgrade head
+uv run alembic upgrade head
 
 # --------- ЗАПУСК ПРИЛОЖЕНИЯ --------------------------------------------------
 echo "Starting Uvicorn..."

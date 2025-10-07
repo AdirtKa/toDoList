@@ -1,5 +1,7 @@
 # ---- БАЗОВЫЙ ОБРАЗ ----------------------------------------------------------
-FROM python:3.12-slim
+FROM python:3.12-slim-trixie
+
+
 
 # ---- НАСТРОЙКА ОКРУЖЕНИЯ ----------------------------------------------------
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -12,23 +14,26 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # По желанию можно добавить системные утилиты (например, для отладки сети):
 # RUN apt-get update && apt-get install -y --no-install-recommends iputils-ping curl && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-
 # ---- УСТАНОВКА ЗАВИСИМОСТЕЙ (pyproject + uv.lock через uv) ---------------------
 # Установим curl для инсталляции uv и сразу поставим uv
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -LsSf https://astral.sh/uv/install.sh | sh -s --
+# The installer requires curl (and certificates) to download the release archive
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
 
-# Добавим uv в PATH (установщик кладёт бинарь в /root/.local/bin)
-ENV PATH="/root/.local/bin:${PATH}"
+# Download the latest installer
+ADD https://astral.sh/uv/install.sh /uv-installer.sh
+
+# Run the installer then remove it
+RUN sh /uv-installer.sh && rm /uv-installer.sh
+
+# Ensure the installed binary is on the `PATH`
+ENV PATH="/root/.local/bin/:$PATH"
 
 # Копируем файлы проекта, влияющие на зависимости, отдельно для кеширования слоя
+WORKDIR /app
 COPY pyproject.toml uv.lock ./
 
 # Синхронизируем окружение через uv (создаст .venv в /app)
-RUN uv sync --frozen --no-dev --no-editable
+RUN /root/.local/bin/uv sync --frozen --no-dev --no-editable
 
 # Используем виртуальное окружение проекта по умолчанию
 ENV PATH="/app/.venv/bin:${PATH}"
