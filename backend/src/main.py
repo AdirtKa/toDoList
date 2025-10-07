@@ -4,6 +4,8 @@ from typing import Any
 
 from fastapi import APIRouter, FastAPI
 
+from src.auth import router as auth_router
+
 app: FastAPI = FastAPI(
     title='ToDoList API',
     version='1.0.0',
@@ -12,6 +14,7 @@ app: FastAPI = FastAPI(
     openapi_url='/api/openapi.json',  # JSON-схема OpenAPI
 )
 router: APIRouter = APIRouter(prefix='/api')
+router.include_router(auth_router)
 
 
 @router.get('/healthcheck')
