@@ -20,7 +20,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: to_do_list_test
+          POSTGRES_DB: to_do_list
         ports:
           - 5432:5432
         # ждём, пока БД поднимется
