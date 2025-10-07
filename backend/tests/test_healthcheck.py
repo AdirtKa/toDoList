@@ -2,10 +2,12 @@
 
 from http import HTTPStatus
 
-from starlette.testclient import TestClient
+import pytest
+from httpx import AsyncClient
 
 
-def test_healthcheck(client: TestClient) -> None:
+@pytest.mark.asyncio
+async def test_healthcheck(client: AsyncClient) -> None:
     """Test the healthcheck endpoint."""
-    response = client.get('/api/healthcheck')
+    response = await client.get('/api/healthcheck')
     assert response.status_code == HTTPStatus.OK
