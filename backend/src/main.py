@@ -4,7 +4,13 @@ from typing import Any
 
 from fastapi import APIRouter, FastAPI
 
-app: FastAPI = FastAPI()
+app: FastAPI = FastAPI(
+    title='ToDoList API',
+    version='1.0.0',
+    docs_url='/api/docs',  # Swagger UI
+    redoc_url='/api/redoc',  # ReDoc (альтернативная документация)
+    openapi_url='/api/openapi.json',  # JSON-схема OpenAPI
+)
 router: APIRouter = APIRouter(prefix='/api')
 
 
