@@ -25,13 +25,6 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
-    env:
-      DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/to_do_list_test
-      JWT_SECRET_KEY: testsecret
-      JWT_ALGORITHM: HS256
-      JWT_ACCESS_EXPIRES: 3600
-      JWT_REFRESH_EXPIRES: 86400
-
     steps:
       - uses: actions/checkout@v4
 
@@ -51,4 +44,10 @@ jobs:
           done
 
       - name: Run tests
+        env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/to_do_list_test
+          JWT_SECRET_KEY: testsecret
+          JWT_ALGORITHM: HS256
+          JWT_ACCESS_EXPIRES: 3600
+          JWT_REFRESH_EXPIRES: 86400
         run: uv run pytest -v --cov=src tests
