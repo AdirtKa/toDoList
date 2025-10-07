@@ -71,6 +71,7 @@ dependencies = [
     { name = "alembic" },
     { name = "asyncpg" },
     { name = "fastapi" },
+    { name = "fastapi-jwt-auth" },
     { name = "psycopg", extra = ["binary"] },
     { name = "psycopg2-binary" },
     { name = "pydantic-settings" },
@@ -94,6 +95,7 @@ requires-dist = [
     { name = "alembic", specifier = ">=1.16.5" },
     { name = "asyncpg", specifier = ">=0.30.0" },
     { name = "fastapi", specifier = ">=0.118.0" },
+    { name = "fastapi-jwt-auth", specifier = ">=0.5.0" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2.10" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },
     { name = "pydantic-settings", specifier = ">=2.11.0" },
@@ -246,6 +248,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/28/3c/2b9345a6504e4055eaa490e0b41c10e338ad61d9aeaae41d97807873cdf2/fastapi-0.118.0.tar.gz", hash = "sha256:5e81654d98c4d2f53790a7d32d25a7353b30c81441be7d0958a26b5d761fa1c8", size = 310536, upload-time = "2025-09-29T03:37:23.126Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/54e2bdaad22ca91a59455251998d43094d5c3d3567c52c7c04774b3f43f2/fastapi-0.118.0-py3-none-any.whl", hash = "sha256:705137a61e2ef71019d2445b123aa8845bd97273c395b744d5a7dfe559056855", size = 97694, upload-time = "2025-09-29T03:37:21.338Z" },
+]
+
+[[package]]
+name = "fastapi-jwt-auth"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fastapi" },
+    { name = "pyjwt" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/87/92/cce264b1a065e9f498358669abb6806a1c4e1c3c32e3f5e2c4060281932b/fastapi-jwt-auth-0.5.0.tar.gz", hash = "sha256:d98068a9e828fe5909a1f338efabc3bb53149f11a9d2d395ab9d90fbb486b375", size = 40727, upload-time = "2020-11-06T11:11:00.646Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/90/fb0ab938d2536d12b26abbb5cb404d1039d317351adb31cb06f4c2263b04/fastapi_jwt_auth-0.5.0-py3-none-any.whl", hash = "sha256:43110a227e36f93b99257a1c79e66df8ed3d4c893291db8f9db2686192011f17", size = 12496, upload-time = "2020-11-06T11:10:56.254Z" },
 ]
 
 [[package]]
@@ -642,6 +657,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b0/77/a5b8c569bf593b0140bde72ea885a803b82086995367bf2037de0159d924/pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887", size = 4968631, upload-time = "2025-06-21T13:39:12.283Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c7/21/705964c7812476f378728bdf590ca4b771ec72385c533964653c68e86bdc/pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b", size = 1225217, upload-time = "2025-06-21T13:39:07.939Z" },
+]
+
+[[package]]
+name = "pyjwt"
+version = "1.7.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2f/38/ff37a24c0243c5f45f5798bd120c0f873eeed073994133c084e1cf13b95c/PyJWT-1.7.1.tar.gz", hash = "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96", size = 41979, upload-time = "2018-12-07T13:40:09.26Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/87/8b/6a9f14b5f781697e51259d81657e6048fd31a113229cf346880bb7545565/PyJWT-1.7.1-py2.py3-none-any.whl", hash = "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e", size = 18928, upload-time = "2018-12-07T13:40:06.872Z" },
 ]
 
 [[package]]
