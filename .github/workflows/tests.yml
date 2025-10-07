@@ -1,30 +1,54 @@
-name: Run unit tests
+name: Run backend tests
 
 on:
   push:
-    branches: [ main, develop, feature-* ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [main, develop]
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: to_do_list_test
+        ports:
+          - 5432:5432
+        # ждём, пока БД поднимется
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/to_do_list_test
+      JWT_SECRET_KEY: testsecret
+      JWT_ALGORITHM: HS256
+      JWT_ACCESS_EXPIRES: 3600
+      JWT_REFRESH_EXPIRES: 86400
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: 3.12
 
       - name: Install dependencies
+        run: uv sync --frozen --no-editable
+
+      - name: Wait for Postgres
         run: |
-          pip install uv
-          uv sync --dev
+          until pg_isready -h localhost -p 5432 -U postgres; do
+            echo "⏳ Waiting for Postgres..."
+            sleep 2
+          done
 
-      - name: Run Ruff lint
-        run: uv run ruff check src tests
-
-      - name: Run pytest
+      - name: Run tests
         run: uv run pytest -v --cov=src tests
