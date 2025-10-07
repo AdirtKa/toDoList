@@ -26,3 +26,10 @@ class ResponseUser(BaseModel):
     """return user information."""
 
     username: str
+
+
+class TokenResponse(BaseModel):
+    """Token response."""
+
+    access_token: str
+    refresh_token: str
