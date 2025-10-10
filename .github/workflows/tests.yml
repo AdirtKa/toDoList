@@ -3,6 +3,9 @@ name: Run backend tests
 on:
   push:
     branches: [ "**" ]
+    branches-ignore:
+      - "feature/frontend-*"
+      - "feature-frontend-*"
   pull_request:
     branches: [ main, develop ]
   workflow_dispatch:
